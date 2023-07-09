@@ -14,10 +14,7 @@ export class MqttController {
 
     @Post()
     async getNotifications(@Body() createRecognizedObjectDto: CreateRecognizedObjectDto){
-        console.log(`cEntro en post`)
-        console.log(`Token ${createRecognizedObjectDto.token}`)
         if(await this.mqttService.findOne(createRecognizedObjectDto.token)){           
-            console.log(`cEncontrado ${createRecognizedObjectDto.token}`)
             this.client.emit('python/mqtt', createRecognizedObjectDto)
         }
     }    
